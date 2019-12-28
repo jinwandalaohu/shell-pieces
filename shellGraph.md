@@ -1,11 +1,12 @@
 
-  <u><a href="#a">a</a></u>    <u><a href="#b">b</a></u>   <u><a href="#c">c</a></u>    <u><a href="#d">d</a></u>    <u><a href="#e">e</a></u>    <u><a href="#f">f</a></u>    <u><a href="#g">g</a></u>  
-  <u><a href="#h">h</a></u>    <u><a href="#i">i</a></u>    <u><a href="#j">j</a></u>    <u><a href="#k">k</a></u>    <u><a href="#l">l</a></u>    <u><a href="#m">m</a></u>    <u><a href="#n">n</a></u>  
-  <u><a href="#o">o</a></u>    <u><a href="#p">p</a></u>    <u><a href="#q">q</a></u>    <u><a href="#r">r</a></u>    <u><a href="#s">s</a></u>    <u><a href="#t">t</a></u>  
-  <u><a href="#u">u</a></u>    <u><a href="#v">v</a></u>    <u><a href="#w">w</a></u>    <u><a href="#x">x</a></u>    <u><a href="#y">y</a></u>    <u><a href="#z">z</a></u>
+  ## <u><a href="#a">a</a></u>    <u><a href="#b">b</a></u>   <u><a href="#c">c</a></u>    <u><a href="#d">d</a></u>    <u><a href="#e">e</a></u>    <u><a href="#f">f</a></u>    <u><a href="#g">g</a></u>  
+  ## <u><a href="#h">h</a></u>    <u><a href="#i">i</a></u>    <u><a href="#j">j</a></u>    <u><a href="#k">k</a></u>    <u><a href="#l">l</a></u>    <u><a href="#m">m</a></u>    <u><a href="#n">n</a></u>  
+  ## <u><a href="#o">o</a></u>    <u><a href="#p">p</a></u>    <u><a href="#q">q</a></u>    <u><a href="#r">r</a></u>    <u><a href="#s">s</a></u>    <u><a href="#t">t</a></u>  
+  ## <u><a href="#u">u</a></u>    <u><a href="#v">v</a></u>    <u><a href="#w">w</a></u>    <u><a href="#x">x</a></u>    <u><a href="#y">y</a></u>    <u><a href="#z">z</a></u>  
+ _____   
 # [a](#a)
-
-# <a name="c">c</a>
+# [b](#b "b")
+# [c](#c "c")
 * cpu
 > 查看cpu信息与虚拟化信息
 ```bash
@@ -23,8 +24,10 @@ lscpu
 cat /proc/<pid>/maps |wc -l
 监控，当前进程使用到的vm映射数量
 ```
-
-# [g](#g)
+# [d](#d "d")
+# [e](#e "e")
+# [f](#f "f")
+# [g](#g "g")
 * grep
   
 ```bash
@@ -47,7 +50,7 @@ gpasswd -a userA groupB
 # 将userA添加到groupB用户组里面： 
 ```
 * [git](fragments/git.md)
-# [i](#i)
+# [i](#i "i")
 * iptbles
 > 在RHEL7里，默认是使用firewalld来管理netfilter子系统，不过底层调用的命令> 仍然是iptables。firewalld是iptables的前端控制器，用于实现持久的网络流量规则
 ```bash
@@ -93,18 +96,23 @@ iptables -I INPUT -p tcp -m multiport --dport 26379:26381,16379:16381,12181 -m i
 iptables --version
 # 查看iptables版本
 ```
-# [k](#k)
+# [j](#j "j")
+# [k](#k "k")
 * kill
 ```bash
 kill -3 PID
 # 打印java进程堆栈信息（同jstack）
+
+ps -ef |grep hello |awk '{print $2}'|xargs kill -9  
+
+# kill ps 打印的进程
 ```
 
-# [l](#l)
+# [l](#l "l")
 * last
 > 查看系统最后登录用户IP
-
-# [n](#n)
+# [m](#m "m")
+# [n](#n "n")
 * netstat
 > 如果发现fin_wait1状态很多，并且client ip分布正常，那可能是有人用肉鸡进行ddos攻击、又或者最近的程序改动引起了问题。
 ````bash
@@ -130,7 +138,8 @@ ntpq -p
 # 查看同步信息，时间偏差等。
 
 ```
-# [p](#p)
+# [o](#o "o")
+# [p](#p "p")
 * ps
 > 
 ```bash
@@ -140,6 +149,9 @@ ps -eo pid,tty,user,comm,lstart,etime | grep redis
 
 ps -Lf <pid> |wc -l
 # 查看某个进程中的线程数量
+
+ps -ef |grep hello |awk '{print $2}'|xargs kill -9 [href](#href)
+# kill ps 打印的进程
 ```
 * pmap
 > report memory map of a process  
@@ -148,7 +160,8 @@ ps -Lf <pid> |wc -l
 
 
 ```
-# [r](#r)
+# [q](#q "q")
+# [r](#r "r")
 * rpm
 > RPM软件包的管理工具。  
 > 用法: rpm [选项...]    
@@ -183,7 +196,7 @@ rpm -ql tree
 rpm -e tree          # 卸载
 
 ```
-# [s](#s)
+# [s](#s "s")
 * set 
 ```bash
 setenforce 0
@@ -203,13 +216,15 @@ cat /proc/sys/vm/max_map_count
 sysctl -w vm.max_map_count=2048000
 # 单个JVM能开启的最大线程数是/proc/sys/vm/max_map_count的设置数的一半.
 ```
-
-# [w](#w)
+# [t](#t "t")
+# [u](#u "u")
+# [v](#v "v")
+# [w](#w "w")
 *  which
 *  [wget](fragments/wget.md)
 * 
-
-# [y](#y)
+# [x](#x "x")
+# [y](#y "y")
 * yum 
 > 包管理工具，可以同时又多个源，只要repo文件中[name]不同即可
 ```bash
@@ -226,3 +241,4 @@ yum makecache fast
 yum update #升级系统内核与所有包
 yum upgrade #升级所有包
 ```
+# [z](#z "z")
