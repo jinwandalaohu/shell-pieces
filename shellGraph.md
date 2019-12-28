@@ -41,6 +41,7 @@ grep -C 10
 gpasswd -a userA groupB 
 # 将userA添加到groupB用户组里面： 
 ```
+* [git](git.md)
 # i
 * iptbles
 > 在RHEL7里，默认是使用firewalld来管理netfilter子系统，不过底层调用的命令> 仍然是iptables。firewalld是iptables的前端控制器，用于实现持久的网络流量规则
