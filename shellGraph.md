@@ -24,6 +24,7 @@ lscpu
 cat /proc/<pid>/maps |wc -l
 监控，当前进程使用到的vm映射数量
 ```
+* [conda](fragments/conda.md)
 # [d](#d "d")
 # [e](#e "e")
 # [f](#f "f")
