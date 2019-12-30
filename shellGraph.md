@@ -151,7 +151,7 @@ ps -eo pid,tty,user,comm,lstart,etime | grep redis
 ps -Lf <pid> |wc -l
 # 查看某个进程中的线程数量
 
-ps -ef |grep hello |awk '{print $2}'|xargs kill -9 [href](#href)
+ps -ef |grep hello |awk '{print $2}'|xargs kill -9 
 # kill ps 打印的进程
 ```
 * pmap

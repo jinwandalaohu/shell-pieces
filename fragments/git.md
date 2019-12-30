@@ -1,9 +1,9 @@
 # git
 > git tortoise 配置  
 > 通过 
->  git config --global user.email "you@example.com"
+>  git config --global user.email "you@example.com"  
 >  git config --global user.name "Your Name"
-> 配置git全局用户名。
+>  配置git全局用户名。
 
 
 ```
