@@ -26,6 +26,7 @@ cat /proc/<pid>/maps |wc -l
 ```
 * [conda](fragments/conda.md)
 # [d](#d "d")
+* [docker](fragments/docker.md)
 # [e](#e "e")
 # [f](#f "f")
 # [g](#g "g")
