@@ -212,6 +212,29 @@ set -x #activate debugging from here
 set +x #stop debugging from here
 
 ```
+* shutdown
+> -c：取消关机操作;
+> 
+> -f：重新启动时不执行fsck;
+> 
+> -F：重新启动时执行fsck;
+> 
+> -h：将系统关机;
+> 
+> -k：只是送出信息给所有用户，但不会实际关机;
+> 
+> -n：不调用init程序进行关机，而由shutdown自己进行;
+> 
+> -r：shutdown之后重新启动;
+> 
+> -t<秒数>：送出警告信息和删除信息之间要延迟多少秒。
+```bash
+shutdown -h now     # 立即关机
+shutdown -c         # 取消关机
+
+
+```
+
 * sysctl
 ```bash
 cat /proc/sys/vm/max_map_count
