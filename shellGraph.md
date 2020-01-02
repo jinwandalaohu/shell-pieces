@@ -29,7 +29,153 @@ cat /proc/<pid>/maps |wc -l
 * [docker](fragments/docker.md)
 # [e](#e "e")
 # [f](#f "f")
+* firewall-cmd
+> 参数 --time=5m  指定在5分钟后回复修改。
+> 基本操作
+> 将网络划分为很多区域，没有区域有自己的target目标，如DROP区的目标为DROP，也就是匹配到该区域就会drop连接，trusted区为accept，匹配到该区域就accept， 如果target为default那么会交给default区域（一般为public）。
+> 配置路径/etc/firewalld/ 与 /usr/lib/firewalld/  后者为系统默认配置， 优先会使用前者的配置。
+```bash
+# 查看所有区域
+firewall-cmd --get-zones
+# 查看激活的区域
+firewall-cmd --get-active-zones
+# 查看默认的区域
+firewall-cmd --get-default-zone 
+
+# 查看开放的端口
+firewall-cmd --zone=public --list-ports  
+
+# 查看添加的规则
+firewall-cmd --zone=public --list-rich-rules  
+
+# 查看区域的规则，包含target
+firewall-cmd --zone=public --list-all
+```
+
+> **查看端口状态**
+```bash
+# 开放单个端口，禁止某个端口。
+firewall-cmd --zone=public --add-port=80/tcp --permanent    
+firewall-cmd --zone=public --remove-port=80/tcp --permanent  
+firewall-cmd --zone=public --add-port=8388-8389/tcp --permanent   # 开放端口范围   
+firewall-cmd --zone= public --query-port=80/tcp  # 查询某个端口         
+# 修改完成以后需要重新加载配置
+firewall-cmd --reload
+
+        
+# 对 147.152.139.197 开放10000端口
+firewall-cmd --permanent --zone=public --add-rich-rule='
+        rule family="ipv4"
+        source address="147.152.139.197/32"
+        port protocol="tcp" port="10000" accept'       
+
+# 例子
+firewall-cmd --permanent --zone=public --add-rich-rule='
+        rule family="ipv4/ipv6"
+        source address="ip/mask"    invet=true
+        destination address-ip/mask invert=true
+        server name = <service name>
+        port protocol="tcp" port="10000" accept/drop/reject/log/adit'     
+# 拒绝端口：
+firewall-cmd --permanent --zone=public --add-rich-rule='
+              rule family="ipv4"
+              source address="47.52.39.197/32"
+              port protocol="tcp" port="10000" reject'  
+
+# 开放全部端口给IP
+firewall-cmd --permanent --zone=public --add-rich-rule='
+              rule family="ipv4"
+              source address="192.168.0.1/32" accept';
+
+# 开放全部端口给网段
+firewall-cmd --permanent --zone=public --add-rich-rule='
+              rule family="ipv4"
+              source address="192.168.0.0/16" accept';
+
+```
+
+> **修改服务**
+> 根据服务来判断，修改对应的配置文件是/etc/firewalld/zones/public.xml
+```bash
+# 查看全部支持的服务
+$ firewall-cmd --get-service
+
+# 查看开放的服务
+$ firewall-cmd --list-service
+
+# 绑定服务到区域,添加https
+$ firewall-cmd --add-service=https --permanent
+
+```
+> **绑定接口到区域**，所有通过该接口的流量都按照该区域的规则。
+```bash
+firewall-cmd --zone=work --add-interface=ens33
+# 绑定ens33 网卡到work区域，通过ens33的流量都按照work区域的规则。
+
+firewall-cmd --zone=internal --change-interface=eth1
+# 修改eth1 绑定到interna， （一个网卡只能同时绑定到一个接口）
+
+firewall-cmd --get-zone-of-interface=ens33
+# 查看网卡ens33 默认绑定到的区域。
+
+firewall-cmd --zone=internal  --remove-interface=eth1
+
+```
+
+> **地址伪装**  （添加伪装才能访问外网）
+```bash
+firewall-cmd --zone=work --add-masquerade 
+# 启用地址伪装（允许work区域的人上网）
+
+firewall-cmd --zone=work --add-masquerade 
+# 禁止work区域的人上网
+
+firewall-cmd --query-masquerade
+```
+
+> **禁止ping**
+```bash
+firewall-cmd  --zone=work --add-icmp-block=echo-reply
+# 禁止应答（不允许ping)
+
+firewall-cmd --zone=worl --remove-icmp-block=echo-reply
+# 允许ping
+
+```
+
+# **端口转发**
+
+```bash
+firewall-cmd [--zone=<zone>] --add-forward-port=port=<port>[-<port>]:proto=<protocol>{:toport=<port>[-port]|:toaddr=<adress>|:toport=<port>[-<port>]:toaddr=<adress>}
+# 带to的是转成什么
+
+firewall-cmd --zone=work --add-forward-port=port=80:proto=tcp:toport=8080:toaddr=192.168.1.1
+# 访问work区域的80 端口的转发到192.168.1.1的8080端口。
+
+firewall-cmd --zone=work --remove-forward-port=port=80:proto=tcp:toport=8080:toaddr=192.168.1.1
+# 禁止这种转发。
+
+
+```
+
+
+> **启停服务**
+```bash
+    systemctl status firewalld        # 查看状态
+    systemctl start firewalld         # 启动
+    systemctl stop firewalld          #关闭
+    systemctl enable firewalld        # 开机启动
+    systemctl disable firewalld       # 取消开机启动
+    firewall-cmd --state              # 查看状态
+    firewall-cmd --reload             #重载配置，让服务生效
+```
+> 新加服务
+> 在/usr/lib/firewalld/services，随便拷贝一个xml文件到一个新名字，比如myservice.xml,把里面的short改为想要名字，重要的是修改 protocol和port。修改完保存，然后把新建的service添加到firewalld。
+```bash
+firewall-cmd --permanent --add-service=myservice
+```
 # [g](#g "g")
+
 * grep
   
 ```bash
