@@ -47,6 +47,37 @@ Git常用操作命令收集：
 
 删除远程分支：$ git push origin :heads/[name]
 ```
+> **git 提交时关于换行符的修改**
+```bash
+#提交检出均不转换
+$ git config --global core.autocrlf false
+
+#提交时转换为LF，检出时不转换
+$ git config --global core.autocrlf input
+
+#提交时转换为LF，检出时转换为CRLF
+$ git config --global core.autocrlf true
+
+```
+
+> **Git在添加ignore文件之前就提交了项目无法再过滤问题**
+```bash
+# 为避免冲突先拉取最新代码
+git pull
+
+# 在本项目目录下清除缓存
+git rm -r --cached .
+
+# 修改 .gitignore 文件,重新添加
+ git add .
+
+# 重新提交
+git commit -m ""
+
+# 文件夹上还有红色感叹号
+#通过删除文件夹再还原（通过右键 git clean ）
+```
+
 ## usecase
 * 新建一个厂库关联的git
 ```
