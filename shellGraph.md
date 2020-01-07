@@ -58,6 +58,10 @@ firewall-cmd --zone=public --list-all
 firewall-cmd --zone=public --add-port=80/tcp --permanent    
 firewall-cmd --zone=public --remove-port=80/tcp --permanent  
 firewall-cmd --zone=public --add-port=8388-8389/tcp --permanent   # 开放端口范围   
+
+# 允许某个IP，
+firewall-cmd --permanent --add-source=192.168.0.0/24
+
 firewall-cmd --zone= public --query-port=80/tcp  # 查询某个端口         
 # 修改完成以后需要重新加载配置
 firewall-cmd --reload
