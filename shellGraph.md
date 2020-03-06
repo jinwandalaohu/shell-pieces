@@ -30,10 +30,10 @@ cat /proc/<pid>/maps |wc -l
 # [e](#e "e")
 # [f](#f "f")
 * firewall-cmd
-> 参数 --time=5m  指定在5分钟后回复修改。
+> 参数 --time=5m  指定在5分钟后恢复修改。
 > 基本操作
 > 将网络划分为很多区域，没有区域有自己的target目标，如DROP区的目标为DROP，也就是匹配到该区域就会drop连接，trusted区为accept，匹配到该区域就accept， 如果target为default那么会交给default区域（一般为public）。
-> 配置路径/etc/firewalld/ 与 /usr/lib/firewalld/  后者为系统默认配置， 优先会使用前者的配置。
+> 配置路径/etc/firewalld/ 与 /usr/lib/firewalld/  后者为系统默认配置， 优先会使用前者的配置（远程配置可先修改配置文件再启动防火墙）。
 ```bash
 # 查看所有区域
 firewall-cmd --get-zones
@@ -392,6 +392,12 @@ sysctl -w vm.max_map_count=2048000
 # 单个JVM能开启的最大线程数是/proc/sys/vm/max_map_count的设置数的一半.
 ```
 # [t](#t "t")
+
+* timedatectl
+>  查看系统的各种时间与时区信息  
+timedatectl list-timezones 列出所有时区  
+timedatectl set-local-rtc 1 将硬件时钟调整为与本地时钟一致, 0 为设置为 UTC 时间  
+timedatectl set-timezone Asia/Shanghai 修改时区  
 # [u](#u "u")
 # [v](#v "v")
 # [w](#w "w")
@@ -400,13 +406,13 @@ sysctl -w vm.max_map_count=2048000
 * 
 # [x](#x "x")
 # [y](#y "y")
-* yum 
+* [yum](../shellUtil/fragments/yum.md)
 > 包管理工具，可以同时又多个源，只要repo文件中[name]不同即可
 ```bash
 yum repolist
 # 列举出可用的源
 
-reposync -r [base]
+reposync -r [base]   
 createrepo -v  # 在下载的yum源文件中的Packages文件夹中执行，报错移除软件包
 # 配置本地yum源文件
 yum clean all
