@@ -290,6 +290,12 @@ ntpq -p
 # 查看同步信息，时间偏差等。
 
 ```
+* nmap
+```bash
+nmap -Pn 10.10.10.10 
+# 扫描主机所有端口状态。
+
+```
 # [o](#o "o")
 # [p](#p "p")
 * ps
@@ -380,8 +386,11 @@ set +x #stop debugging from here
 > -t<秒数>：送出警告信息和删除信息之间要延迟多少秒。
 ```bash
 shutdown -h now     # 立即关机
+shutdown -h 12:00   # 在12点关机
 shutdown -c         # 取消关机
 
+shutdown +5 “This System will be shutdown in 5 minutes” # 5分钟后关机
+shutdown –r +3 “3分钟后关机重启”
 
 ```
 

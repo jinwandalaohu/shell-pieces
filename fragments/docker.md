@@ -27,7 +27,7 @@ docker stop $(docker ps -a | awk '{ print $1}' | tail -n +2)
 ```
 service docker stop
 ```
-1. 迁移docker数据
+3. 迁移docker数据
 ```bash
 mkdir /data/service/docker -p
 mv /var/lib/docker /data/service/docker/
@@ -53,7 +53,15 @@ service docker start
 docker start $(docker ps -a | awk '{ print $1}' | tail -n +2)
 
 ```
-
+6. docker服务容器自动启动与停止
+```bash
+systemctl enable docker.service ## docker 服务开机启动自动启动
+systemctl disable docker.service ## 关闭开机启动
+docker run --restart=always ## 启动时 容器自动启动
+docker update --restart=always <CONTAINER ID> ## 启动后  修改容器自动启动
+docker update --restart=on-failure:3 [容器名] ## 自动启动3次，失败后放弃
+```
+> --restart参数有3个可选值 :  no,on-failure,always
 
 ## 备份docker
 > docker容器路径 /var/lib/docker/containers
