@@ -263,6 +263,10 @@ ps -ef |grep hello |awk '{print $2}'|xargs kill -9
 # [l](#l "l")
 * last
 > 查看系统最后登录用户IP
+
+
+* lsof
+> 
 # [m](#m "m")
 # [n](#n "n")
 * netstat
@@ -289,11 +293,21 @@ ntpstat
 ntpq -p
 # 查看同步信息，时间偏差等。
 
+ntpdate -d ip  
+# 查看与IP的时间偏差，可用于查看时间服务是否开启。
+
 ```
 * nmap
 ```bash
 nmap -Pn 10.10.10.10 
 # 扫描主机所有端口状态。
+
+```
+* nc
+> 安装 yum install -y nmap-ncat
+```bash
+nc -l 10086 #在本机10086端口起监听
+nc ip 10086 #向目标IP端口发送信息， 与上面一起使用用于测试网络是否连通。
 
 ```
 # [o](#o "o")
@@ -408,6 +422,19 @@ timedatectl list-timezones 列出所有时区
 timedatectl set-local-rtc 1 将硬件时钟调整为与本地时钟一致, 0 为设置为 UTC 时间  
 timedatectl set-timezone Asia/Shanghai 修改时区  
 # [u](#u "u")
+* usermod   
+```bash
+usermod -g root dsmart # 修改dsmart用户至 root组。
+
+```
+* ulimit 
+```bash
+ulimit -a   # open file 一行为系统允许单个进程打开的最大句柄数
+```
+``` bash
+ulimit -n 2048 # 设置当前用户最大的句柄数，重启会失效。
+```  
+> vim /etc/security/limits.conf 
 # [v](#v "v")
 # [w](#w "w")
 *  which

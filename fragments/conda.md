@@ -52,3 +52,7 @@ conda update anaconda
 # 更新python
 conda update python
  ```
+
+ * pip 
+> 包管理工具
+

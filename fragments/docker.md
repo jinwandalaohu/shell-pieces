@@ -250,6 +250,12 @@ CMD curl -f http://localhost/ || exit 1
        RUN指令是设置编译镜像时执行的脚本和程序，镜像编译完成后，RUN指令的生命周期结束  
        容器启动时，可以通过CMD和ENTRYPOINT设置启动项，其中CMD叫做容器默认启动命令，如果在docker run命令末尾添加command，则会替换镜像中CMD设置的启动程序；ENRTYPOINT叫做入口程序，不能被docker run命令末尾的command替换，而是将command当作字符串，传递给ENTRYPOINT作为参数
 
+
+## 知识点
+> docker 通过namespace进行隔离，通过Cgroup进行限制，Mount namespace与rootfs构建文件系统。
+> 多个层通过 AUFS 进行联合挂载。
+* AUFS
+  ![layer](../images/docker_layer.png)
 ```
 
 ```
