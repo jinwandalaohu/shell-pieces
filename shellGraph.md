@@ -6,6 +6,11 @@
  _____   
 # [a](#a "a")
 # [b](#b "b")
+* basename
+> 移除路径的前缀
+```bash
+basename /root/home # 返回home
+```
 # [c](#c "c")
 * cpu
 > 查看cpu信息与虚拟化信息
@@ -24,6 +29,16 @@ lscpu
 cat /proc/<pid>/maps |wc -l
 监控，当前进程使用到的vm映射数量
 ```
+* chage
+> 用来修改帐号和密码的有效期限。
+```bash
+chage -d $(date +%F) root
+# 更新用户密码修改时间
+
+chage -l root
+# 查看root用户 密码策略。
+
+```
 * [conda](fragments/conda.md)
 # [d](#d "d")
 * [docker](fragments/docker.md)
@@ -32,12 +47,15 @@ cat /proc/<pid>/maps |wc -l
 * firewall-cmd
 > 参数 --time=5m  指定在5分钟后恢复修改。
 > 基本操作
-> 将网络划分为很多区域，没有区域有自己的target目标，如DROP区的目标为DROP，也就是匹配到该区域就会drop连接，trusted区为accept，匹配到该区域就accept， 如果target为default那么会交给default区域（一般为public）。
+> 将流量分流到不同的区域，按照每个区域的规则去处理， 源区域优先于接口区域。 源区域指指定了源IP，  接口区域指绑定的网卡接口（适配器）。
+> 
+> 
 > 配置路径/etc/firewalld/ 与 /usr/lib/firewalld/  后者为系统默认配置， 优先会使用前者的配置（远程配置可先修改配置文件再启动防火墙）。
 ```bash
 # 查看所有区域
 firewall-cmd --get-zones
-# 查看激活的区域
+
+#任何配置了一个网络接口和/或一个源的区域就是一个活动区域active zone。列出活动的区域：
 firewall-cmd --get-active-zones
 # 查看默认的区域
 firewall-cmd --get-default-zone 
