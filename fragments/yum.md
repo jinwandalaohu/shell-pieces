@@ -15,8 +15,8 @@
 > 将下载的rmp包进行拷贝到局域网机器上   
 > 通过rpm -ivh 安装createrepo  
 > 创建/etc/yum.d/ansible.repo  
->> [docker]  
-name=docker
+>> [ansible]  
+name=ansible
 baseurl=file:///home/yumRepo/ansible # 配置本地目录作为源
 gpgcheck=0                           # 关闭
 enabled=1                            # 使用当前源
