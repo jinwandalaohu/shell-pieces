@@ -11,9 +11,7 @@
 > fdisl -l 查看硬盘分区信息。  
 > fdisk  /dev/vda  对硬盘进行分析  
 > mkfs.ext3 /dev/vda1 对硬盘进行格式化  
-> mount挂载。 修改fstab 启动挂载。  
-#### lvm分区划分
-> fdisk 分区后通过 t 命令修改id为8e
-> pvcreate /dev/vda1  
-> vgcreate  
-> lvcreate  
+> mount挂载。 修改/etc/fstab 启动挂载。  
+
+
+
