@@ -6,22 +6,24 @@
 
 ## <u><a href="#u">u</a></u> <u><a href="#v">v</a></u> <u><a href="#w">w</a></u> <u><a href="#x">x</a></u> <u><a href="#y">y</a></u> <u><a href="#z">z</a></u>
 
----
-
 # [a](#a "a")
 
 # [b](#b "b")
 
 - basename
-  > 移除路径的前缀
+  > 移除路径的前缀,只保留只最后一个文件夹名称或文件名称
+- basedir
+  > 返回文件或文件夹所在的路径
 
 ```bash
 basename /root/home # 返回home
+basedir  /root/home # 返回/root
 ```
+
 - [bash](fragments/bash.md)
-(https://www.yiibai.com/bash)
-(https://wangdoc.com/bash/intro.html)
-> bash相关信息
+  (https://www.yiibai.com/bash)
+  (https://wangdoc.com/bash/intro.html)  
+  _bash 相关信息_
 
 # [c](#c "c")
 
@@ -195,7 +197,7 @@ firewall-cmd --zone=worl --remove-icmp-block=echo-reply
 
 ```
 
-# **端口转发**
+> **端口转发**
 
 ```bash
 firewall-cmd [--zone=<zone>] --add-forward-port=port=<port>[-<port>]:proto=<protocol>{:toport=<port>[-port]|:toaddr=<adress>|:toport=<port>[-<port>]:toaddr=<adress>}

@@ -2,8 +2,11 @@
 #### lvm分区划分
 > fdisk 分区后通过 t 命令修改id为8e
 > pvcreate /dev/vda1  
-> vgcreate  
-> lvcreate  
+> vgcreate      
+> lvcreate  lvcreate -L 200G -n lvName vgName
+> mkfs.ext4  mkfs.xfs 进行格式化。
+> lsblk -f 查看uuid
+> vi /etc/fstab 修改启动挂载，  option(defaults)   0 (不dump) 0 (跳过fsck)   
 
 ### 
 
