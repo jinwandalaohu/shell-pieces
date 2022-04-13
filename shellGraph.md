@@ -231,6 +231,18 @@ firewall-cmd --zone=work --remove-forward-port=port=80:proto=tcp:toport=8080:toa
 firewall-cmd --permanent --add-service=myservice
 ```
 
+- fdisk
+  ```bash
+  fdisk -l #查看磁盘分区信息
+  ```
+  > `fdisk -l` 的输出信息一般是， Disk (/dev/sda)为硬盘的信息，device (/dev/sda1) 为该硬盘的分区信息。  
+  > /dev/mapper/xxx 为通过 lvm 划分的分区。  
+  > 硬盘可以分区后以分区(/dev/sda1)为单位加入 vg,也可以整个硬盘(/dev/sda)加入 vg.
+```bash
+    fdisk /dev/sda # 对disk /dev/sda 进行操作。
+```
+> 对硬盘进行分区操作。分区之后，可以通过lvm划分，也可以格式化后直接挂载，查看[lvm操作](fragments/lvm.md)
+
 # [g](#g "g")
 
 - grep
