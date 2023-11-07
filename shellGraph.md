@@ -115,7 +115,7 @@ firewall-cmd --reload
 # 对 147.152.139.197 开放10000端口
 firewall-cmd --permanent --zone=public --add-rich-rule='
         rule family="ipv4"
-        source address="147.152.139.197/32"
+        source [not] address="147.152.139.197/32"
         port protocol="tcp" port="10000" accept'
 
 # 例子
@@ -171,7 +171,6 @@ firewall-cmd --get-zone-of-interface=ens33
 # 查看网卡ens33 默认绑定到的区域。
 
 firewall-cmd --zone=internal  --remove-interface=eth1
-
 ```
 
 > **地址伪装** （添加伪装才能访问外网）
@@ -238,10 +237,12 @@ firewall-cmd --permanent --add-service=myservice
   > `fdisk -l` 的输出信息一般是， Disk (/dev/sda)为硬盘的信息，device (/dev/sda1) 为该硬盘的分区信息。  
   > /dev/mapper/xxx 为通过 lvm 划分的分区。  
   > 硬盘可以分区后以分区(/dev/sda1)为单位加入 vg,也可以整个硬盘(/dev/sda)加入 vg.
+
 ```bash
     fdisk /dev/sda # 对disk /dev/sda 进行操作。
 ```
-> 对硬盘进行分区操作。分区之后，可以通过lvm划分，也可以格式化后直接挂载，查看[lvm操作](fragments/lvm.md)
+
+> 对硬盘进行分区操作。分区之后，可以通过 lvm 划分，也可以格式化后直接挂载，查看[lvm 操作](fragments/lvm.md)
 
 # [g](#g "g")
 
@@ -394,6 +395,7 @@ nmap -Pn 10.10.10.10
 ```bash
 nc -l 10086 #在本机10086端口起监听
 nc ip 10086 #向目标IP端口发送信息， 与上面一起使用用于测试网络是否连通。
+nc –z –v 192.168.147.150 123 #使用命令nc命令测试tcp端口的连通性
 
 ```
 

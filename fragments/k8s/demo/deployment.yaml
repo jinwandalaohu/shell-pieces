@@ -1,0 +1,30 @@
+kind: Deployment	#资源对象类型
+apiVersion: apps/v1	#版本
+metadata:	#元数据
+  name: myweb	#名称
+spec:	#详细定义
+  replicas: 2	#副本数量
+  selector:	    #定义标签选择器
+    matchLabels:  #同样支持matchExpression表达式语法
+      app: mynginx	#ReplicaSet通过标签来确定哪个Pod由它来管理
+  template:	#定义用来创建Pod的模板
+    metadata:	#Pod元数据
+      labels:	#名称由控制器生成
+        app: mynginx	#定义标签
+    spec:	#Pod的详细定义
+      volumes:
+        - name: task-pv-storage
+          persistentVolumeClaim:
+            claimName: task-pv-claim-m
+      restartPolicy: Always	#重启策略
+      containers:	#容器定义
+      - name: nginx	#容器名称
+        image: nginx:1.25.2	#创建容器使用的镜像
+        imagePullPolicy: IfNotPresent	#镜像拉取策略
+        ports:	#容器内服务使用的端口号
+        - name:	#端口名称
+          protocol: TCP	 #协议
+          containerPort: 80	#端口
+        volumeMounts:
+          - mountPath: "/usr/share/nginx/html"
+            name: task-pv-storage
