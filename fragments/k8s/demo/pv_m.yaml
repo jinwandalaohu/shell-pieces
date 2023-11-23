@@ -12,3 +12,7 @@ spec:
     - ReadWriteMany
   hostPath:
     path: "/mnt/datam"  # 会自动在对应的节点上创建文件夹，用于存储数据，
+
+
+
+
